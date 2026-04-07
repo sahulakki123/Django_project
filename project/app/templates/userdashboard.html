@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+  <title>{% block title %}Base{% endblock %}</title>
+
+  {% load static %}
+
+
+
+
+
+
+
+  <style>
+    /* Navbar */
+    .navbar {
+      background: #ffffff !important;
+    }
+
+    .navbar .nav-link {
+      font-weight: 500;
+    }
+
+    .navbar .nav-link:hover {
+      color: #ff6b00 !important;
+    }
+
+    /* Search button */
+    .btn-success {
+      background: #ff6b00;
+      border: none;
+    }
+
+    .btn-success:hover {
+      background: #e65c00;
+    }
+
+    /* Cart button */
+    .btn-warning {
+      background: #ff6b00;
+      border: none;
+    }
+
+    .btn-warning:hover {
+      background: #e65c00;
+    }
+
+    /* Cards */
+    .card {
+      border-radius: 15px;
+      transition: 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Price color */
+    .text-success {
+      color: #ff6b00 !important;
+    }
+
+    /* Add to cart */
+    .btn-success.btn-sm {
+      background: #28a745;
+    }
+
+    /* Order now */
+    .btn-primary {
+      background: #ff6b00;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background: #e65c00;
+    }
+
+    /* Profile header */
+    .bg-primary {
+      background: linear-gradient(135deg, #ff512f, #dd2476) !important;
+    }
+
+    /* Footer */
+    footer {
+      background: #111 !important;
+    }
+
+    footer h5 {
+      color: #ff6b00;
+    }
+
+    /* About section */
+    section.bg-light {
+      background: #fff7f2 !important;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ✅ Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <div class="container">
+
+      <a class="navbar-brand" href="#">
+        <img src="{% static 'image/swiggylogo2.png'%}" height="40">
+      </a>
+
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav ms-auto align-items-center">
+
+          <li class="nav-item"><a class="nav-link active" href="#">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+          <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+
+          <!-- Search -->
+          <li class="nav-item me-2">
+            <form action="{% url 'search' %}" method="get" class="d-flex">
+              <input class="form-control form-control-sm me-2" type="search" name="search" placeholder="Search..."
+                value="{{ request.GET.search }}">
+
+              <button class="btn btn-success btn-sm me-1" type="submit">
+                <i class="fa fa-search"></i>
+              </button>
+
+              <a href="{% url 'userdashboard' %}" class="btn btn-outline-secondary btn-sm">
+                Reset
+              </a>
+            </form>
+          </li>
+
+          <!-- Cart -->
+          <li class="nav-item ms-2">
+            <a href="{% url 'cart_page' %}" class="btn btn-warning btn-sm position-relative">
+              🛒 Cart
+
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {{ cart_count }}
+              </span>
+
+            </a>
+          </li>
+
+          <!-- Logout -->
+          <li class="nav-item ms-2">
+            <a href="{% url 'logout' %}" class="btn btn-danger btn-sm">
+              Logout
+            </a>
+          </li>
+
+        </ul>
+      </div>
+
+    </div>
+  </nav>
+
+
+  <div class="container mt-4">
+    <h3 class="mb-3">Welcome : {{ name }} 👋</h3>
+    <hr>
+
+    {% if show_profile %}
+
+    <div class="row justify-content-center mt-4">
+      <div class="col-md-5">
+
+        <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+
+          <!-- Header -->
+          <div class="bg-primary text-white text-center p-4">
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="rounded-circle shadow" width="90"
+              height="90">
+            <h5 class="mt-3 mb-0">{{ name }}</h5>
+            <small>User Profile</small>
+          </div>
+
+          <!-- Body -->
+          <div class="card-body px-4 py-3">
+
+            <div class="d-flex align-items-center mb-3">
+              <i class="fa fa-user text-primary me-3 fs-5"></i>
+              <div>
+                <small class="text-muted">Full Name</small>
+                <div class="fw-semibold">{{ name }}</div>
+              </div>
+            </div>
+
+            <hr>
+
+            <div class="d-flex align-items-center mb-3">
+              <i class="fa fa-envelope text-success me-3 fs-5"></i>
+              <div>
+                <small class="text-muted">Email Address</small>
+                <div class="fw-semibold">{{ email }}</div>
+              </div>
+            </div>
+
+            <hr>
+
+            <div class="d-flex align-items-center">
+              <i class="fa fa-phone text-warning me-3 fs-5"></i>
+              <div>
+                <small class="text-muted">Contact Number</small>
+                <div class="fw-semibold">{{ contact }}</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Footer -->
+          <div class="card-footer bg-white border-0 text-center pb-4">
+            <a href="{% url 'userdashboard' %}" class="btn btn-outline-secondary btn-sm px-4">
+              ⬅ Back
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    {% else %}
+
+    <!-- Items -->
+    <div class="row g-3">
+
+      {% for i in items %}
+      <div class="col-md-3 d-flex justify-content-center">
+        <div class="card h-100 shadow-sm border-0" style="width:90%;">
+
+          {% if i.itemimage %}
+          <img src="{{ i.itemimage.url }}" class="card-img-top" style="height:120px; object-fit:cover;">
+          {% endif %}
+
+          <div class="card-body p-2" style="font-size:13px;">
+            <div><strong>Item :</strong> {{ i.itemname }}</div>
+            <div><strong>Restaurant :</strong> {{ i.restaurant.restaurantname }}</div>
+            <div><strong>Description :</strong> {{ i.itemdesc }}</div>
+            <div class="text-success fw-bold">
+              <strong>Price :</strong> ₹ {{ i.itemprice }}
+            </div>
+          </div>
+          <!-- Buttons -->
+          <div class="card-footer bg-white border-0 p-2">
+
+            <a href="{% url 'add_to_cart' i.id %}" class="btn btn-success btn-sm w-100 mb-1">
+              🛒 Add to Cart
+            </a>
+            <a href="{% url 'paynow' i.id %}" class="btn btn-primary btn-sm w-100">
+              ⚡ Order Now
+            </a>
+
+          </div>
+
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+
+    {% endif %}
+
+  </div>
+
+  <!-- ✅ About Section -->
+  <section class="bg-light py-5 text-center">
+    <div class="container">
+      <h2 class="mb-3">ABOUT US</h2>
+      <p class="text-muted">
+        Swiggy is a new-age consumer-first organization offering an easy-to-use convenience platform.
+      </p>
+
+      <div class="row mt-4">
+        <div class="col-md-4">
+          <img src="{% static 'image/food.webp'%}" class="img-fluid rounded shadow">
+        </div>
+        <div class="col-md-4">
+          <img src="{% static 'image/instamart.webp'%}" class="img-fluid rounded shadow">
+        </div>
+        <div class="col-md-4">
+          <img src="{% static 'image/dineout.webp'%}" class="img-fluid rounded shadow">
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <img src="{% static 'image/swiggysign.webp'%}" height="80">
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ✅ Footer -->
+  <footer class="bg-dark text-light pt-5">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-3">
+          <img src="{% static 'image/download.png'%}" height="50">
+          <p class="mt-2">© 2025 Swiggy Limited</p>
+        </div>
+
+        <div class="col-md-3">
+          <h5>Company</h5>
+          <ul class="list-unstyled">
+            <li>About Us</li>
+            <li>Careers</li>
+            <li>Team</li>
+          </ul>
+        </div>
+
+        <div class="col-md-3">
+          <h5>Contact</h5>
+          <ul class="list-unstyled">
+            <li>Help & Support</li>
+            <li>Partner with us</li>
+          </ul>
+        </div>
+
+        <div class="col-md-3">
+          <h5>Follow Us</h5>
+          <i class="fab fa-linkedin me-2"></i>
+          <i class="fab fa-instagram me-2"></i>
+          <i class="fab fa-facebook me-2"></i>
+        </div>
+
+      </div>
+
+      <hr class="bg-light">
+
+      <div class="text-center pb-3">
+        <p>Download the Swiggy App</p>
+        <img src="{% static 'image/appstorelogo.svg'%}" height="40">
+        <img src="{% static 'image/playstorelogo.webp'%}" height="40">
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

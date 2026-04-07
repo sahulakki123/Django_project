@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Order Now</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: #f8f9fa;
+        }
+
+        /* Card */
+        .card {
+            border: none;
+            border-radius: 15px;
+        }
+
+        /* Image */
+        .card img {
+            border-radius: 12px;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        /* left column vertical */
+        .col-md-4 {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Price */
+        .text-success {
+            color: #ff6b00 !important;
+            font-weight: 600;
+        }
+
+        /* Quantity */
+        input[type="number"] {
+            border-radius: 8px;
+            height: 45px;
+        }
+
+        /* Pay Now button */
+        button.btn-success {
+            background: #ff6b00;
+            border: none;
+            width: 100%;
+            height: 42px;
+            font-weight: 600;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        button.btn-success:hover {
+            background: #e65c00;
+        }
+
+        /* Razorpay button */
+        form+form {
+            margin-top: 8px;
+        }
+
+        .razorpay-payment-button {
+            width: 100% !important;
+            height: 42px !important;
+            border-radius: 8px !important;
+            background: #0d6efd !important;
+            color: white !important;
+            border: none !important;
+            font-weight: 600 !important;
+        }
+
+        /* Mobile */
+        @media(max-width:768px) {
+            .card img {
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container mt-5">
+
+        <div class="card shadow p-4">
+
+            <form method="POST" action="{% url 'payment_amount' item_details.id %}">
+                {% csrf_token %}
+
+                <div class="row">
+                    <div class="col-md-4">
+
+                        <img src="{{ item_details.itemimage.url }}" class="img-fluid rounded">
+
+                        <button class="btn btn-success">Pay Now</button>
+
+                    </div>
+
+                    <div class="col-md-8">
+
+                        <h3>{{ item_details.itemname }}</h3>
+
+                        <h6 class="text-muted">
+                            🍽 {{ item_details.restaurant.restaurantname }}
+                        </h6>
+
+                        <p>
+                            {{ item_details.itemdesc }}
+                        </p>
+
+                        <h5 class="text-success">
+                            ₹ {{ item_details.itemprice }}
+                        </h5>
+
+                        <div class="mb-3">
+                            <label class="form-label">Quantity</label>
+                            <input type="number" name="quantity" value="1"
+                                class="form-control" min="1" required>
+                        </div>
+
+                        <input type="hidden" name="item_id" value="{{ item_details.id }}">
+                        <input type="hidden" name="itemprice" value="{{ item_details.itemprice }}">
+
+                    </div>
+                </div>
+
+            </form>
+
+            {% if payment %}
+
+            <form action="{% url 'pay_status' item_details.id %}" method="post">
+                {% csrf_token %}
+
+                <script src="https://checkout.razorpay.com/v1/checkout.js"
+                    data-key="rzp_test_pr99iascS1WRtU"
+                    data-amount="{{ payment.amount }}"
+                    data-currency="{{ payment.currency }}"
+                    data-order_id="{{ payment.id }}"
+                    data-buttontext="Pay with Razorpay"
+                    data-name="Food Order"
+                    data-description="Payment for your order"
+                    data-theme.color="#28a745">
+                </script>
+
+            </form>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
