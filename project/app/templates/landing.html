@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,255 +14,280 @@
 
     <title>{% block title %}base{% endblock %}</title>
 
-    {% block css %}{% endblock %}
+    <style>
+        /* navbar hover */
+        .nav-hover:hover {
+            opacity: 0.8;
+        }
+
+        /* food card styling */
+        .food-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .food-card img {
+            height: 120px;
+            object-fit: cover;
+        }
+
+        .food-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .food-card p {
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .hero-search {
+            max-width: 700px;
+            margin: auto;
+        }
+    </style>
+
 </head>
 
 <body>
 
-<!-- ✅ HEADER / NAVBAR -->
-<nav class="navbar navbar-expand-lg custom-navbar px-4 py-3" style="background-color: #fc8019;">
-    <div class="container-fluid">
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg px-4 py-3" style="background-color:#fc8019;">
+        <div class="container-fluid">
 
-        <!-- LOGO -->
-        <a class="navbar-brand fw-bold text-white" href="#">
-            <img src="{% static 'image/Swiggylogo.png' %}" height="40">
-        </a>
+            <a class="navbar-brand fw-bold text-white" href="#">
+                <img src="{% static 'image/Swiggylogo.png' %}" height="40">
+            </a>
 
-        <!-- MOBILE TOGGLE -->
-        <button class="navbar-toggler text-white border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
-            <i class="fa-solid fa-bars"></i>
-        </button>
+            <button class="navbar-toggler text-white border-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarContent">
+                <i class="fa-solid fa-bars"></i>
+            </button>
 
-        <!-- NAV ITEMS -->
-        <div class="collapse navbar-collapse" id="navbarContent">
-            <ul class="navbar-nav ms-auto align-items-center gap-3">
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav ms-auto align-items-center gap-3">
 
-                <li class="nav-item">
-                    <a class="nav-link text-white nav-hover" href="#">
-                        <i class="fa-solid fa-building me-1"></i> Corporate
-                    </a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white nav-hover" href="#">
+                            <i class="fa-solid fa-building me-1"></i> Corporate
+                        </a>
+                    </li>
 
-                <li class="nav-item">
-                    <a class="nav-link text-white nav-hover" href="#">
-                        <i class="fa-solid fa-handshake me-1"></i> Partner
-                    </a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white nav-hover" href="#">
+                            <i class="fa-solid fa-handshake me-1"></i> Partner
+                        </a>
+                    </li>
 
-                <li class="nav-item">
-                    <a class="btn btn-light px-3 fw-semibold">
-                        Get App
-                    </a>
-                </li>
+                    <li class="nav-item">
+                        <a class="btn btn-light px-3 fw-semibold">Get App</a>
+                    </li>
 
-                <li class="nav-item">
-                    <a class="btn btn-dark px-3" href="{% url 'signup' %}">
-                        Sign In
-                    </a>
-                </li>
+                    <li class="nav-item">
+                        <a class="btn btn-dark px-3" href="{% url 'signup' %}">Sign In</a>
+                    </li>
 
-            </ul>
+                </ul>
+            </div>
+
         </div>
+    </nav>
 
-    </div>
-</nav>
+    <!-- HERO -->
+    <section class="container-fluid py-5 bg-light">
+        <div class="row align-items-center text-center">
 
-<!-- ✅ HERO SECTION -->
-<section class="container-fluid py-5 bg-light">
-    <div class="row align-items-center text-center">
+            <div class="col-md-3 d-none d-md-block">
+                <img src="{% static 'image/Veggies.avif'%}" class="img-fluid">
+            </div>
 
-        <!-- LEFT IMAGE -->
-        <div class="col-md-3 d-none d-md-block">
-            <img src="{% static 'image/Veggies.avif'%}" class="img-fluid">
-        </div>
+            <div class="col-md-6">
+                <h1 class="fw-bold mb-4">
+                    Order food & groceries. Discover <br>
+                    best restaurants. Swiggy it!
+                </h1>
 
-        <!-- CENTER CONTENT -->
-        <div class="col-md-6">
-            <h1 class="fw-bold mb-4">
-                Order food & groceries. Discover <br>
-                best restaurants. Swiggy it!
-            </h1>
+                <div class="bg-white p-3 rounded shadow hero-search">
+                    <div class="row g-2">
 
-            <!-- SEARCH -->
-            <div class="bg-white p-3 rounded shadow">
-                <div class="row g-2">
-
-                    <div class="col-md-6">
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="fa-solid fa-location-dot"></i>
-                            </span>
-                            <input type="text" class="form-control" placeholder="Enter your delivery location">
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </span>
+                                <input type="text" class="form-control" placeholder="Enter your delivery location">
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-6">
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </span>
-                            <input type="text" class="form-control" placeholder="Search for restaurant, item or more">
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </span>
+                                <input type="text" class="form-control"
+                                    placeholder="Search for restaurant, item or more">
+                            </div>
                         </div>
+
                     </div>
-
                 </div>
             </div>
-        </div>
 
-        <!-- RIGHT IMAGE -->
-        <div class="col-md-3 d-none d-md-block">
-            <img src="{% static 'image/Sushi_replace.avif'%}" class="img-fluid">
-        </div>
+            <div class="col-md-3 d-none d-md-block">
+                <img src="{% static 'image/Sushi_replace.avif'%}" class="img-fluid">
+            </div>
 
+        </div>
+    </section>
+
+    <!-- FOOD SECTION -->
+    <div class="container my-5">
+        <h2 class="text-center mb-4 fw-bold">Order our best food options</h2>
+
+        <div class="row g-4">
+
+            <!-- ITEM -->
+            <div class="col-6 col-md-3 col-lg-2">
+                <div class="card text-center food-card">
+                    <img src="{% static 'image/Noodles.jpeg'%}" class="card-img-top">
+                    <div class="card-body">
+                        <p>Noodles</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-3 col-lg-2">
+                <div class="card text-center food-card">
+                    <img src="{% static 'image/Chole Bhature1.jpeg'%}" class="card-img-top">
+                    <div class="card-body">
+                        <p>Chole Bhature</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-3 col-lg-2">
+                <div class="card text-center food-card">
+                    <img src="{% static 'image/Shawarma.jpeg'%}" class="card-img-top">
+                    <div class="card-body">
+                        <p>Shawarma</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-3 col-lg-2">
+                <div class="card text-center food-card">
+                    <img src="{% static 'image/Dosa.jpeg'%}" class="card-img-top">
+                    <div class="card-body">
+                        <p>Dosa</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-3 col-lg-2">
+                <div class="card text-center food-card">
+                    <img src="{% static 'image/Pav Bhaji Pav Bhaji.jpeg'%}" class="card-img-top">
+                    <div class="card-body">
+                        <p>Pav Bhaji</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-3 col-lg-2">
+                <div class="card text-center food-card">
+                    <img src="{% static 'image/Pasta.jpeg'%}" class="card-img-top">
+                    <div class="card-body">
+                        <p>Pasta</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-3 col-lg-2">
+                <div class="card text-center food-card">
+                    <img src="{% static 'image/Pure Veg.jpeg'%}" class="card-img-top">
+                    <div class="card-body">
+                        <p>Pure Veg</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-3 col-lg-2">
+                <div class="card text-center food-card">
+                    <img src="{% static 'image/Gulab Jamun.jpeg'%}" class="card-img-top">
+                    <div class="card-body">
+                        <p>Gulab Jamun</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-3 col-lg-2">
+                <div class="card text-center food-card">
+                    <img src="{% static 'image/Pastry.jpeg'%}" class="card-img-top">
+                    <div class="card-body">
+                        <p>Pastry</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-3 col-lg-2">
+                <div class="card text-center food-card">
+                    <img src="{% static 'image/Idli1.jpeg'%}" class="card-img-top">
+                    <div class="card-body">
+                        <p>Idli</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-3 col-lg-2">
+                <div class="card text-center food-card">
+                    <img src="{% static 'image/Shake.jpeg'%}" class="card-img-top">
+                    <div class="card-body">
+                        <p>Shake</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-3 col-lg-2">
+                <div class="card text-center food-card">
+                    <img src="{% static 'image/Paratha.jpeg'%}" class="card-img-top">
+                    <div class="card-body">
+                        <p>Paratha</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-3 col-lg-2">
+                <div class="card text-center food-card">
+                    <img src="{% static 'image/Cake.jpeg'%}" class="card-img-top">
+                    <div class="card-body">
+                        <p>Cake</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-3 col-lg-2">
+                <div class="card text-center food-card">
+                    <img src="{% static 'image/Vada.jpeg'%}" class="card-img-top">
+                    <div class="card-body">
+                        <p>Vada</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-3 col-lg-2">
+                <div class="card text-center food-card">
+                    <img src="{% static 'image/Ice Cream.jpeg'%}" class="card-img-top">
+                    <div class="card-body">
+                        <p>Ice Cream</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
-</section>
 
-<div class="container my-5">
-    <h2 class="text-center mb-4">Order our best food options</h2>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 
-    <div class="row g-4">
-
-        <!-- ITEM -->
-        <div class="col-6 col-md-3 col-lg-2">
-            <div class="card text-center food-card">
-                <img src="{% static 'image/Noodles.jpeg'%}" class="card-img-top">
-                <div class="card-body">
-                    <p>Noodles</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-6 col-md-3 col-lg-2">
-            <div class="card text-center food-card">
-                <img src="{% static 'image/Chole Bhature1.jpeg'%}" class="card-img-top">
-                <div class="card-body">
-                    <p>Chole Bhature</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-6 col-md-3 col-lg-2">
-            <div class="card text-center food-card">
-                <img src="{% static 'image/Shawarma.jpeg'%}" class="card-img-top">
-                <div class="card-body">
-                    <p>Shawarma</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-6 col-md-3 col-lg-2">
-            <div class="card text-center food-card">
-                <img src="{% static 'image/Dosa.jpeg'%}" class="card-img-top">
-                <div class="card-body">
-                    <p>Dosa</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-6 col-md-3 col-lg-2">
-            <div class="card text-center food-card">
-                <img src="{% static 'image/Pav Bhaji Pav Bhaji.jpeg'%}" class="card-img-top">
-                <div class="card-body">
-                    <p>Pav Bhaji</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-6 col-md-3 col-lg-2">
-            <div class="card text-center food-card">
-                <img src="{% static 'image/Pasta.jpeg'%}" class="card-img-top">
-                <div class="card-body">
-                    <p>Pasta</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-6 col-md-3 col-lg-2">
-            <div class="card text-center food-card">
-                <img src="{% static 'image/Pure Veg.jpeg'%}" class="card-img-top">
-                <div class="card-body">
-                    <p>Pure Veg</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-6 col-md-3 col-lg-2">
-            <div class="card text-center food-card">
-                <img src="{% static 'image/Gulab Jamun.jpeg'%}" class="card-img-top">
-                <div class="card-body">
-                    <p>Gulab Jamun</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-6 col-md-3 col-lg-2">
-            <div class="card text-center food-card">
-                <img src="{% static 'image/Pastry.jpeg'%}" class="card-img-top">
-                <div class="card-body">
-                    <p>Pastry</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-6 col-md-3 col-lg-2">
-            <div class="card text-center food-card">
-                <img src="{% static 'image/Idli1.jpeg'%}" class="card-img-top">
-                <div class="card-body">
-                    <p>Idli</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-6 col-md-3 col-lg-2">
-            <div class="card text-center food-card">
-                <img src="{% static 'image/Shake.jpeg'%}" class="card-img-top">
-                <div class="card-body">
-                    <p>Shake</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-6 col-md-3 col-lg-2">
-            <div class="card text-center food-card">
-                <img src="{% static 'image/Paratha.jpeg'%}" class="card-img-top">
-                <div class="card-body">
-                    <p>Paratha</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-6 col-md-3 col-lg-2">
-            <div class="card text-center food-card">
-                <img src="{% static 'image/Cake.jpeg'%}" class="card-img-top">
-                <div class="card-body">
-                    <p>Cake</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-6 col-md-3 col-lg-2">
-            <div class="card text-center food-card">
-                <img src="{% static 'image/Vada.jpeg'%}" class="card-img-top">
-                <div class="card-body">
-                    <p>Vada</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-6 col-md-3 col-lg-2">
-            <div class="card text-center food-card">
-                <img src="{% static 'image/Ice Cream.jpeg'%}" class="card-img-top">
-                <div class="card-body">
-                    <p>Ice Cream</p>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-
-
-
-
-
+</html>
