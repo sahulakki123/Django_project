@@ -110,58 +110,56 @@
 <body>
 
   <!-- ✅ Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm py-1">
     <div class="container">
 
       <a class="navbar-brand" href="#">
-        <img src="{% static 'image/swiggylogo2.png'%}" height="40">
+        <img src="{% static 'image/logo.png'%}" style="height:60px;">
       </a>
 
-      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="nav">
         <ul class="navbar-nav ms-auto align-items-center">
 
-          <li class="nav-item"><a class="nav-link active" href="#">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-          <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
 
-          <!-- Search -->
-          <li class="nav-item me-2">
-            <form action="{% url 'search' %}" method="get" class="d-flex">
-              <input class="form-control form-control-sm me-2" type="search" name="search" placeholder="Search..."
-                value="{{ request.GET.search }}">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Services</a>
+          </li>
 
-              <button class="btn btn-success btn-sm me-1" type="submit">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+          </li>
+
+          <li class="nav-item ms-2">
+            <form class="d-flex" action="{% url 'search' %}">
+              <input class="form-control form-control-sm me-2" type="search" name="search" placeholder="Search">
+              <button class="btn btn-success btn-sm">
                 <i class="fa fa-search"></i>
               </button>
-
-              <a href="{% url 'userdashboard' %}" class="btn btn-outline-secondary btn-sm">
-                Reset
-              </a>
             </form>
           </li>
 
-          <!-- Cart -->
           <li class="nav-item ms-2">
             <a href="{% url 'cart_page' %}" class="btn btn-warning btn-sm position-relative">
-              🛒 Cart
-
-              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              🛒
+              <span class="position-absolute top-0 start-100 translate-middle badge bg-danger">
                 {{ cart_count }}
               </span>
-
             </a>
           </li>
 
-          <!-- Logout -->
           <li class="nav-item ms-2">
-            <a href="{% url 'logout' %}" class="btn btn-danger btn-sm">
-              Logout
-            </a>
+            <a href="{% url 'logout' %}" class="btn btn-danger btn-sm">Logout</a>
           </li>
 
         </ul>
@@ -245,7 +243,7 @@
         <div class="card h-100 shadow-sm border-0" style="width:90%;">
 
           {% if i.itemimage %}
-          <img src="{{ i.itemimage.url }}" class="card-img-top" style="height:120px; object-fit:cover;">
+          <img src="{{ i.itemimage.url }}" class="card-img-top" style="height:80%; width:100%; object-fit:cover;">
           {% endif %}
 
           <div class="card-body p-2" style="font-size:13px;">
