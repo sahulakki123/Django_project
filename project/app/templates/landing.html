@@ -5,293 +5,638 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta name="description" content="Foodhub - Discover the best food and drinks near you.">
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <title>
-        {% block title %}
-        base
-        {% endblock %}
+        {% block title %} Foodhub - Order Best Food & Groceries {% endblock %}
     </title>
 
     <style>
-        /* navbar hover */
-        .nav-hover:hover {
-            opacity: 0.8;
+        :root {
+            --primary-color: #fc8019;
+            --primary-hover: #e06c10;
+            --dark-color: #1a1a1a;
+            --light-bg: #fff8f5;
         }
 
-        /* food card styling */
-        .food-card {
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #fcfcfc;
+            color: var(--dark-color);
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link {
+            color: var(--dark-color) !important;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--primary-color);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        .nav-link:hover::after {
+            width: 80%;
+        }
+
+        .btn-primary-custom {
+            background-color: var(--primary-color);
+            color: white;
             border: none;
-            border-radius: 15px;
-            overflow: hidden;
-            transition: 0.3s;
-        }
-
-        .food-card img {
-            height: 120px;
-            object-fit: cover;
-        }
-
-        .food-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .food-card p {
+            border-radius: 50px;
+            padding: 10px 25px;
             font-weight: 600;
-            margin: 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(252, 128, 25, 0.3);
+            text-decoration: none;
         }
 
-        .hero-search {
-            max-width: 700px;
-            margin: auto;
+        .btn-primary-custom:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(252, 128, 25, 0.4);
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--light-bg), #ffffff);
+            padding: 120px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+        }
+
+        .hero-title span {
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            z-index: 1;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .hero-image-wrapper img {
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 100%;
+            display: block;
+        }
+
+        .hero-image-wrapper:hover img {
+            transform: scale(1.08);
+        }
+
+        /* Search Bar */
+        .search-container {
+            background: white;
+            padding: 15px;
+            border-radius: 50px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            max-width: 800px;
+        }
+
+        .search-divider {
+            height: 30px;
+            width: 1px;
+            background: #e0e0e0;
+            margin: 0 15px;
+        }
+
+        .search-input-group {
+            display: flex;
+            align-items: center;
+            flex: 1;
+            padding: 0 15px;
+        }
+
+        .search-input-group i {
+            color: var(--primary-color);
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+
+        .search-input-group input {
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 1.05rem;
+            background: transparent;
+        }
+
+        .search-input-group input::placeholder {
+            color: #aaa;
+            font-weight: 400;
+        }
+
+        .btn-search {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 40px;
+            padding: 14px 32px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(252, 128, 25, 0.3);
+            white-space: nowrap;
+            font-size: 1rem;
+        }
+
+        .btn-search:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(252, 128, 25, 0.4);
+        }
+
+        /* Food Circular Categories */
+        .food-grid {
+            margin-top: 80px;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 50px;
+        }
+        
+        .section-title {
+            font-weight: 800;
+            font-size: 2.2rem;
+            margin: 0;
+            color: var(--dark-color);
+        }
+
+        .food-item {
+            text-align: center;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .food-img-container {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 15px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+            border: 4px solid white;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            background-color: white;
+        }
+
+        .food-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .food-item:hover .food-img-container {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 35px rgba(252, 128, 25, 0.2);
+            border-color: rgba(252, 128, 25, 0.1);
+        }
+
+        .food-item:hover .food-img-container img {
+            transform: scale(1.1);
+        }
+
+        .food-name {
+            font-weight: 600;
+            font-size: 1.15rem;
+            transition: color 0.3s ease;
+            color: #444;
+        }
+
+        .food-item:hover .food-name {
+            color: var(--primary-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 991px) {
+            .hero-section {
+                padding-top: 100px;
+                text-align: center;
+            }
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            .search-container {
+                margin: 0 auto;
+            }
+            .search-input-group {
+                text-align: left;
+            }
+            .stats-container {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            .search-container {
+                flex-direction: column;
+                border-radius: 20px;
+                padding: 20px;
+            }
+            .search-divider {
+                width: 100%;
+                height: 1px;
+                margin: 15px 0;
+            }
+            .btn-search {
+                width: 100%;
+                margin-top: 15px;
+            }
+            .food-img-container {
+                width: 110px;
+                height: 110px;
+            }
+        }
+        
+        /* Floating animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        .animate-float-delayed {
+            animation: float 6s ease-in-out 3s infinite;
         }
     </style>
-
 </head>
 
 <body>
 
     <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg px-4 py-3" style="background-color:#fc8019;">
-        <div class="container-fluid">
-
-            <a class="navbar-brand" href="#">
-                <img src="{% static 'image/logo.png'%}" style="height:40px;">
+    <nav class="navbar navbar-expand-lg fixed-top px-4 py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+                <img src="{% static 'image/logo.png'%}" style="height:45px;" alt="Foodhub Logo">
+                <span class="fw-bold fs-4" style="color: var(--primary-color);">Foodhub</span>
             </a>
 
-            <button class="navbar-toggler text-white border-0" type="button" data-bs-toggle="collapse"
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarContent">
-                <i class="fa-solid fa-bars"></i>
+                <i class="fa-solid fa-bars fs-3" style="color: var(--primary-color);"></i>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarContent">
-                <ul class="navbar-nav ms-auto align-items-center gap-3">
-
+                <ul class="navbar-nav ms-auto align-items-center gap-2 gap-lg-4">
                     <li class="nav-item">
-                        <a class="nav-link text-white nav-hover" href="#">
-                            <i class="fa-solid fa-building me-1"></i> Corporate
+                        <a class="nav-link" href="#">
+                            <i class="fa-solid fa-building me-1 opacity-75"></i> Corporate
                         </a>
                     </li>
-
                     <li class="nav-item">
-                        <a class="nav-link text-white nav-hover" href="#">
-                            <i class="fa-solid fa-handshake me-1"></i> Partner
+                        <a class="nav-link" href="#">
+                            <i class="fa-solid fa-handshake me-1 opacity-75"></i> Partner
                         </a>
                     </li>
-
-                    <li class="nav-item">
-                        <a class="btn btn-light px-3 fw-semibold">Get App</a>
+                    <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
+                        <a class="btn btn-outline-dark rounded-pill px-4 py-2 fw-semibold" href="{% url 'signup' %}">Sign In</a>
                     </li>
-
-                    <li class="nav-item">
-                        <a class="btn btn-dark px-3" href="{% url 'signup' %}">Sign In</a>
+                    <li class="nav-item mt-2 mt-lg-0">
+                        <a class="btn-primary-custom d-inline-block" href="#">Get the App</a>
                     </li>
-
                 </ul>
             </div>
-
         </div>
     </nav>
 
-    <!-- HERO -->
-    <section class="container-fluid py-5 bg-light">
-        <div class="row align-items-center text-center">
+    <!-- HERO SECTION -->
+    <section class="hero-section min-vh-100 d-flex align-items-center">
+        <div class="container">
+            <div class="row align-items-center gx-5">
+                
+                <div class="col-lg-6 order-2 order-lg-1 mt-5 mt-lg-0">
+                    <div class="pe-lg-4">
+                        <span class="badge rounded-pill mb-4 px-3 py-2 border" style="background-color: white; color: var(--primary-color); border-color: rgba(252, 128, 25, 0.2) !important; font-size: 0.9rem;">
+                            <i class="fa-solid fa-bolt me-1 text-warning"></i> Lightning Fast Delivery
+                        </span>
+                        
+                        <h1 class="hero-title">
+                            Craving something delicious? <br>
+                            <span>Foodhub</span> delivers!
+                        </h1>
+                        <p class="hero-subtitle">
+                            Explore top-rated restaurants, exclusive offers, and fresh groceries delivered to your door in minutes.
+                        </p>
 
-            <div class="col-md-3 d-none d-md-block">
-                <img src="{% static 'image/Veggies.avif'%}" class="img-fluid">
-            </div>
-
-            <div class="col-md-6">
-                <h1 class="fw-bold mb-4">
-                    Order food & groceries. Discover <br>
-                    best restaurants. Foodhub it!
-                </h1>
-
-                <div class="bg-white p-3 rounded shadow hero-search">
-                    <div class="row g-2">
-
-                        <div class="col-md-6">
-                            <div class="input-group">
-                                <span class="input-group-text">
-                                    <i class="fa-solid fa-location-dot"></i>
-                                </span>
-                                <input type="text" class="form-control" placeholder="Enter your delivery location">
+                        <!-- Search Bar -->
+                        <div class="search-container mb-5">
+                            <div class="search-input-group">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <input type="text" placeholder="Your delivery location">
+                            </div>
+                            <div class="search-divider d-none d-md-block"></div>
+                            <div class="search-input-group">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                <input type="text" placeholder="Search for restaurant, item...">
+                            </div>
+                            <button class="btn-search d-flex align-items-center">
+                                Find Food <i class="fa-solid fa-arrow-right ms-2"></i>
+                            </button>
+                        </div>
+                        
+                        <!-- Stats -->
+                        <div class="stats-container d-flex gap-5 border-top pt-4 mt-4">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="bg-light rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                    <i class="fa-solid fa-shop fs-4 text-dark"></i>
+                                </div>
+                                <div>
+                                    <h4 class="fw-bold mb-0">50+</h4>
+                                    <span class="text-muted small fw-medium">Restaurants</span>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="bg-light rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                    <i class="fa-solid fa-face-smile fs-4 text-dark"></i>
+                                </div>
+                                <div>
+                                    <h4 class="fw-bold mb-0">2M+</h4>
+                                    <span class="text-muted small fw-medium">Customers</span>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="col-md-6">
-                            <div class="input-group">
-                                <span class="input-group-text">
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                </span>
-                                <input type="text" class="form-control"
-                                    placeholder="Search for restaurant, item or more">
-                            </div>
-                        </div>
-
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-3 d-none d-md-block">
-                <img src="{% static 'image/Sushi_replace.avif'%}" class="img-fluid">
-            </div>
+                <div class="col-lg-6 order-1 order-lg-2 position-relative pt-5 pt-lg-0">
+                    <div class="row g-4 align-items-center">
+                        <div class="col-6">
+                            <div class="hero-image-wrapper animate-float shadow-lg">
+                                <img src="{% static 'image/Veggies.avif'%}" alt="Fresh Groceries">
+                            </div>
+                        </div>
+                        <div class="col-6 text-start">
+                            <div class="hero-image-wrapper animate-float-delayed shadow-lg mb-4">
+                                <img src="{% static 'image/Sushi_replace.avif'%}" alt="Delicious Food">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Floating Badge -->
+                    <div class="position-absolute bg-white rounded-4 p-3 shadow-lg text-center d-none d-md-flex align-items-center gap-3 animate-float" style="bottom: 50px; right: 0px; z-index: 2; border: 1px solid rgba(0,0,0,0.05); border-radius: 16px;">
+                        <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 45px; height: 45px;">
+                            <i class="fa-solid fa-star fs-5"></i>
+                        </div>
+                        <div class="text-start">
+                            <h6 class="fw-bold mb-0 text-dark">Top Rated Services</h6>
+                            <small class="text-muted fw-medium">4.9/5 from users</small>
+                        </div>
+                    </div>
+                </div>
 
+            </div>
         </div>
     </section>
 
-    <!-- FOOD SECTION -->
-    <div class="container my-5">
-        <h2 class="text-center mb-4 fw-bold">Order our best food options</h2>
+    <!-- WHAT'S ON YOUR MIND SECTION -->
+    <div class="container food-grid">
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">What's on your mind?</h2>
+                <p class="text-muted mt-2 fs-5">Explore our top categories and satisfy your cravings</p>
+            </div>
+            <div class="d-none d-md-flex gap-3">
+                <button class="btn btn-light rounded-circle shadow-sm border" style="width: 50px; height: 50px;"><i class="fa-solid fa-arrow-left text-dark"></i></button>
+                <button class="btn btn-light rounded-circle shadow-sm border" style="width: 50px; height: 50px;"><i class="fa-solid fa-arrow-right text-dark"></i></button>
+            </div>
+        </div>
 
-        <div class="row g-4">
+        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6 g-4 py-4 justify-content-center">
 
-            <!-- ITEM -->
-            <div class="col-6 col-md-3 col-lg-2">
-                <div class="card text-center food-card">
-                    <img src="{% static 'image/Noodles.jpeg'%}" class="card-img-top">
-                    <div class="card-body">
-                        <p>Noodles</p>
+            <!-- ITEMS -->
+            <div class="col">
+                <a href="#" class="food-item">
+                    <div class="food-img-container">
+                        <img src="{% static 'image/Noodles.jpeg'%}" alt="Noodles">
                     </div>
-                </div>
+                    <span class="food-name">Noodles</span>
+                </a>
             </div>
 
-            <div class="col-6 col-md-3 col-lg-2">
-                <div class="card text-center food-card">
-                    <img src="{% static 'image/Chole Bhature1.jpeg'%}" class="card-img-top">
-                    <div class="card-body">
-                        <p>Chole Bhature</p>
+            <div class="col">
+                <a href="#" class="food-item">
+                    <div class="food-img-container">
+                        <img src="{% static 'image/Chole Bhature1.jpeg'%}" alt="Chole Bhature">
                     </div>
-                </div>
+                    <span class="food-name">Chole Bhature</span>
+                </a>
             </div>
 
-            <div class="col-6 col-md-3 col-lg-2">
-                <div class="card text-center food-card">
-                    <img src="{% static 'image/Shawarma.jpeg'%}" class="card-img-top">
-                    <div class="card-body">
-                        <p>Shawarma</p>
+            <div class="col">
+                <a href="#" class="food-item">
+                    <div class="food-img-container">
+                        <img src="{% static 'image/Shawarma.jpeg'%}" alt="Shawarma">
                     </div>
-                </div>
+                    <span class="food-name">Shawarma</span>
+                </a>
             </div>
 
-            <div class="col-6 col-md-3 col-lg-2">
-                <div class="card text-center food-card">
-                    <img src="{% static 'image/Dosa.jpeg'%}" class="card-img-top">
-                    <div class="card-body">
-                        <p>Dosa</p>
+            <div class="col">
+                <a href="#" class="food-item">
+                    <div class="food-img-container">
+                        <img src="{% static 'image/Dosa.jpeg'%}" alt="Dosa">
                     </div>
-                </div>
+                    <span class="food-name">Dosa</span>
+                </a>
             </div>
 
-            <div class="col-6 col-md-3 col-lg-2">
-                <div class="card text-center food-card">
-                    <img src="{% static 'image/Pav Bhaji Pav Bhaji.jpeg'%}" class="card-img-top">
-                    <div class="card-body">
-                        <p>Pav Bhaji</p>
+            <div class="col">
+                <a href="#" class="food-item">
+                    <div class="food-img-container">
+                        <img src="{% static 'image/Pav Bhaji Pav Bhaji.jpeg'%}" alt="Pav Bhaji">
                     </div>
-                </div>
+                    <span class="food-name">Pav Bhaji</span>
+                </a>
             </div>
 
-            <div class="col-6 col-md-3 col-lg-2">
-                <div class="card text-center food-card">
-                    <img src="{% static 'image/Pasta.jpeg'%}" class="card-img-top">
-                    <div class="card-body">
-                        <p>Pasta</p>
+            <div class="col">
+                <a href="#" class="food-item">
+                    <div class="food-img-container">
+                        <img src="{% static 'image/Pasta.jpeg'%}" alt="Pasta">
                     </div>
-                </div>
+                    <span class="food-name">Pasta</span>
+                </a>
             </div>
 
-            <div class="col-6 col-md-3 col-lg-2">
-                <div class="card text-center food-card">
-                    <img src="{% static 'image/Pure Veg.jpeg'%}" class="card-img-top">
-                    <div class="card-body">
-                        <p>Pure Veg</p>
+            <div class="col">
+                <a href="#" class="food-item">
+                    <div class="food-img-container">
+                        <img src="{% static 'image/Pure Veg.jpeg'%}" alt="Pure Veg">
                     </div>
-                </div>
+                    <span class="food-name">Pure Veg</span>
+                </a>
             </div>
 
-            <div class="col-6 col-md-3 col-lg-2">
-                <div class="card text-center food-card">
-                    <img src="{% static 'image/Gulab Jamun.jpeg'%}" class="card-img-top">
-                    <div class="card-body">
-                        <p>Gulab Jamun</p>
+            <div class="col">
+                <a href="#" class="food-item">
+                    <div class="food-img-container">
+                        <img src="{% static 'image/Gulab Jamun.jpeg'%}" alt="Gulab Jamun">
                     </div>
-                </div>
+                    <span class="food-name">Gulab Jamun</span>
+                </a>
             </div>
 
-            <div class="col-6 col-md-3 col-lg-2">
-                <div class="card text-center food-card">
-                    <img src="{% static 'image/Pastry.jpeg'%}" class="card-img-top">
-                    <div class="card-body">
-                        <p>Pastry</p>
+            <div class="col">
+                <a href="#" class="food-item">
+                    <div class="food-img-container">
+                        <img src="{% static 'image/Pastry.jpeg'%}" alt="Pastry">
                     </div>
-                </div>
+                    <span class="food-name">Pastry</span>
+                </a>
             </div>
 
-            <div class="col-6 col-md-3 col-lg-2">
-                <div class="card text-center food-card">
-                    <img src="{% static 'image/Idli1.jpeg'%}" class="card-img-top">
-                    <div class="card-body">
-                        <p>Idli</p>
+            <div class="col">
+                <a href="#" class="food-item">
+                    <div class="food-img-container">
+                        <img src="{% static 'image/Idli1.jpeg'%}" alt="Idli">
                     </div>
-                </div>
+                    <span class="food-name">Idli</span>
+                </a>
             </div>
 
-            <div class="col-6 col-md-3 col-lg-2">
-                <div class="card text-center food-card">
-                    <img src="{% static 'image/Shake.jpeg'%}" class="card-img-top">
-                    <div class="card-body">
-                        <p>Shake</p>
+            <div class="col">
+                <a href="#" class="food-item">
+                    <div class="food-img-container">
+                        <img src="{% static 'image/Shake.jpeg'%}" alt="Shake">
                     </div>
-                </div>
+                    <span class="food-name">Shake</span>
+                </a>
             </div>
 
-            <div class="col-6 col-md-3 col-lg-2">
-                <div class="card text-center food-card">
-                    <img src="{% static 'image/Paratha.jpeg'%}" class="card-img-top">
-                    <div class="card-body">
-                        <p>Paratha</p>
+            <div class="col">
+                <a href="#" class="food-item">
+                    <div class="food-img-container">
+                        <img src="{% static 'image/Paratha.jpeg'%}" alt="Paratha">
                     </div>
-                </div>
+                    <span class="food-name">Paratha</span>
+                </a>
             </div>
 
-            <div class="col-6 col-md-3 col-lg-2">
-                <div class="card text-center food-card">
-                    <img src="{% static 'image/Cake.jpeg'%}" class="card-img-top">
-                    <div class="card-body">
-                        <p>Cake</p>
+            <div class="col">
+                <a href="#" class="food-item">
+                    <div class="food-img-container">
+                        <img src="{% static 'image/Cake.jpeg'%}" alt="Cake">
                     </div>
-                </div>
+                    <span class="food-name">Cake</span>
+                </a>
             </div>
 
-            <div class="col-6 col-md-3 col-lg-2">
-                <div class="card text-center food-card">
-                    <img src="{% static 'image/Vada.jpeg'%}" class="card-img-top">
-                    <div class="card-body">
-                        <p>Vada</p>
+            <div class="col">
+                <a href="#" class="food-item">
+                    <div class="food-img-container">
+                        <img src="{% static 'image/Vada.jpeg'%}" alt="Vada">
                     </div>
-                </div>
+                    <span class="food-name">Vada</span>
+                </a>
             </div>
 
-            <div class="col-6 col-md-3 col-lg-2">
-                <div class="card text-center food-card">
-                    <img src="{% static 'image/Ice Cream.jpeg'%}" class="card-img-top">
-                    <div class="card-body">
-                        <p>Ice Cream</p>
+            <div class="col">
+                <a href="#" class="food-item">
+                    <div class="food-img-container">
+                        <img src="{% static 'image/Ice Cream.jpeg'%}" alt="Ice Cream">
                     </div>
-                </div>
+                    <span class="food-name">Ice Cream</span>
+                </a>
             </div>
 
         </div>
     </div>
+    
+    <!-- Footer/Spacing -->
+    <div class="mb-5 pb-5"></div>
 
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Auto-hide/show navbar on scroll
+        let lastScrollTop = 0;
+        const navbar = document.querySelector('.navbar');
+        
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Allow navbar to hide only when scrolled somewhat down
+            if (scrollTop > lastScrollTop && scrollTop > 150) {
+                // Scroll down
+                navbar.style.transform = 'translateY(-100%)';
+            } else {
+                // Scroll up
+                navbar.style.transform = 'translateY(0)';
+            }
+            
+            // Add shadow when scrolled
+            if (scrollTop > 50) {
+                navbar.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.08)';
+            } else {
+                navbar.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.05)';
+            }
+            
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        });
+    </script>
 </body>
 
 </html>

@@ -9,115 +9,300 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
         body {
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
         }
 
-        /* Sidebar */
+        /* Sidebar Styles */
         .sidebar {
             height: 100vh;
-            background: linear-gradient(180deg, #212529, #343a40);
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             color: white;
-            padding: 20px 10px;
+            padding: 30px 15px;
             position: sticky;
             top: 0;
+            box-shadow: 4px 0 15px rgba(0,0,0,0.1);
+            z-index: 100;
         }
 
-        .sidebar h4 {
+        .sidebar h4, .sidebar h6 {
             font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .sidebar hr {
+            background-color: rgba(255,255,255,0.3);
+            height: 2px;
+            border: none;
+            margin: 20px 0;
         }
 
         .sidebar a {
-            color: #ced4da;
+            color: rgba(255, 255, 255, 0.85);
             display: block;
-            padding: 12px 15px;
-            margin-bottom: 5px;
+            padding: 12px 20px;
+            margin-bottom: 8px;
             text-decoration: none;
-            border-radius: 8px;
-            transition: 0.3s;
+            border-radius: 10px;
+            transition: all 0.3s ease;
             font-size: 15px;
+            font-weight: 500;
         }
 
         .sidebar a:hover {
-            background: #495057;
+            background: rgba(255, 255, 255, 0.2);
             color: white;
-            padding-left: 20px;
+            transform: translateX(5px);
+        }
+
+        /* Admin Info */
+        .admin-info img {
+            border: 3px solid rgba(255,255,255,0.4);
+            padding: 3px;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
         }
 
         /* Cards */
         .card {
             border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+            margin-bottom: 20px;
+            overflow: hidden;
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card h5 {
+            font-size: 16px;
+            font-weight: 500;
+            opacity: 0.9;
+            margin-bottom: 5px;
+            color: white;
         }
 
         .card h2 {
             font-weight: 700;
+            font-size: 32px;
+            margin: 0;
+            color: white;
         }
 
-        /* Tables */
+        /* Vibrant Card Gradients */
+        .bg-primary { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important; }
+        .bg-success { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%) !important; }
+        .bg-danger  { background: linear-gradient(135deg, #ff0844 0%, #ffb199 100%) !important; }
+        .bg-warning { background: linear-gradient(135deg, #f6d365 0%, #fda085 100%) !important; }
+
+        /* Tables layout */
         .table {
             background: white;
-            border-radius: 10px;
+            border-radius: 12px;
             overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-bottom: 0;
+        }
+        
+        .table-bordered { border: none; }
+        
+        .table th, .table td {
+            vertical-align: middle;
+            border-bottom: 1px solid #f0f0f0;
+            border-top: none !important;
+            padding: 15px;
         }
 
-        .table thead {
-            background: #212529;
+        .table thead th {
+            text-transform: uppercase;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            background: #f8f9fa;
+            color: #555;
+            border-bottom: 2px solid #e9ecef !important;
+        }
+
+        .table-dark {
+            background: #212529 !important;
+            color: white !important;
+        }
+        
+        .table-dark th {
+            color: white !important;
+            background: #212529 !important;
+        }
+
+        .table tbody tr {
+            transition: all 0.2s ease;
         }
 
         .table tbody tr:hover {
-            background: navajowhite;
+            background-color: #f8faff !important;
+            transform: scale(1.01);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        /* Form Controls */
+        .form-control, .form-select {
+            border-radius: 10px;
+            box-shadow: none;
+            border: 1px solid #e2e8f0;
+            padding: 12px 15px;
+            font-size: 15px;
+            transition: all 0.3s;
+            background-color: #f8f9fa;
+        }
+
+        .form-control:focus, .form-select:focus {
+            background-color: white;
+            border-color: #4facfe;
+            box-shadow: 0 0 0 4px rgba(79, 172, 254, 0.15);
+        }
+        
+        .form-label {
+            font-weight: 500;
+            color: #4a5568;
+            margin-bottom: 8px;
         }
 
         /* Buttons */
-        button {
+        .btn, button[type="submit"], button {
             border: none;
-            padding: 6px 12px;
-            border-radius: 6px;
-            transition: 0.3s;
-        }
-
-        button:hover {
-            transform: scale(1.05);
-        }
-
-        .btn-primary {
-            background: #0d6efd;
-        }
-
-        .btn-success {
-            background: #198754;
-        }
-
-        /* Form */
-        .form-control {
+            padding: 10px 20px;
             border-radius: 8px;
-            box-shadow: none;
-            border: 1px solid #dee2e6;
-        }
-
-        .form-control:focus {
-            border-color: #0d6efd;
-            box-shadow: 0 0 0 0.1rem rgba(13, 110, 253, .25);
-        }
-
-        /* Card header */
-        .card-header {
-            border-radius: 12px 12px 0 0 !important;
+            transition: all 0.3s ease;
             font-weight: 600;
+            letter-spacing: 0.3px;
         }
 
-        /* Image */
-        img {
-            border-radius: 8px;
+        .btn:hover, button[type="submit"]:hover, button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Button specifics matching Bootstrap but cooler */
+        .btn-danger { background: #ff4757; color: white; }
+        .btn-primary { background: #4facfe; color: white; }
+        .btn-success { background: #2ed573; color: white; }
+
+        .card-header {
+            border-radius: 16px 16px 0 0 !important;
+            font-weight: 600;
+            padding: 15px 20px;
+            border-bottom: none;
+            letter-spacing: 0.5px;
+            color: white;
+        }
+
+        /* Dashboard specific titles */
+        h2.text-dark {
+            font-weight: 700;
+            color: #2d3436;
+        }
+        
+        div.col-md-10 > div > h2 {
+            font-weight: 700;
+            color: #2d3436;
+        }
+        
+        h4 {
+            font-weight: 600;
+            color: #2d3436;
+            margin-bottom: 20px;
+        }
+
+        hr {
+            background-color: #e2e8f0;
+            opacity: 1;
+        }
+
+        /* ============== MEDIA QUERIES (RESPONSIVENESS) ============== */
+        
+        @media (max-width: 992px) {
+            .card h2 { font-size: 26px; }
+            .card h5 { font-size: 14px; }
+        }
+
+        @media (max-width: 768px) {
+            /* Transform Sidebar into a horizontal scrollable menu */
+            .sidebar {
+                height: auto;
+                position: relative;
+                padding: 15px;
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: center;
+                border-radius: 0 0 20px 20px;
+                margin-bottom: 20px;
+            }
+
+            .admin-info {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .sidebar hr {
+                width: 100%;
+                margin: 15px 0;
+            }
+
+            /* Make links look like pills on mobile */
+            .sidebar a {
+                display: inline-block;
+                width: auto;
+                margin: 5px;
+                padding: 8px 15px;
+                background: rgba(255,255,255,0.1);
+                border-radius: 30px;
+                font-size: 14px;
+            }
+
+            .sidebar a:hover {
+                transform: none;
+                background: rgba(255,255,255,0.25);
+            }
+
+            /* Stack cards gracefully */
+            .col-md-3 {
+                margin-bottom: 15px;
+            }
+            
+            /* Make table containers scrollable on mobile */
+            .mt-5, .card-body {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .table {
+                min-width: 700px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .sidebar a {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+            .sidebar h6 {
+                font-size: 14px;
+            }
+            div.col-md-10 > div > h2 {
+                font-size: 24px;
+            }
         }
     </style>
 </head>
@@ -131,12 +316,11 @@
             <div class="col-md-2 sidebar">
                 {% load static %}
 
-                    <div class="admin-info text-center">
-                        <img src="{% static data.image %}" 
-                        class="admin-img"
+                <div class="admin-info text-center">
+                    <img src="{% static data.image %}" class="admin-img"
                         style="width:70px;height:70px;border-radius:50%;object-fit:cover;">
-                        <h6 class="mt-2">Welcome : {{ data.name }}</h6>
-                    </div>
+                    <h6 class="mt-2">Welcome : {{ data.name }}</h6>
+                </div>
                 <hr>
 
                 <a href="#">Dashboard</a>
@@ -153,13 +337,13 @@
             <!-- Main Content -->
             <div class="col-md-10 p-4">
 
-            <div class="d-flex justify-content-between align-items-center">
-                <h2>Dashboard</h2>
-                <a href="/" class="btn btn-danger">
-                    <i class="fa fa-sign-out-alt"></i> Logout
-                </a>
-            </div>
-                            <!-- ✅ Django Messages -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2>Dashboard</h2>
+                    <a href="/" class="btn btn-danger">
+                        <i class="fa fa-sign-out-alt"></i> Logout
+                    </a>
+                </div>
+                <!-- ✅ Django Messages -->
                 {% if messages %}
                 {% for message in messages %}
                 <div class="alert alert-{{ message.tags }}">
@@ -167,8 +351,8 @@
                 </div>
                 {% endfor %}
                 {% endif %}
-            <hr>
-                
+                <hr>
+
 
                 <div class="row">
 

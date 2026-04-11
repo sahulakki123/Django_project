@@ -4,6 +4,174 @@
 <head>
     <title>Cart</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            margin-top: 50px !important;
+            margin-bottom: 50px !important;
+        }
+
+        h3 {
+            font-weight: 700;
+            color: #ff6b00;
+            letter-spacing: -0.5px;
+            margin-bottom: 5px;
+        }
+
+        h4 {
+            font-weight: 700;
+            color: #2d3436;
+            margin-top: 15px;
+            font-size: 24px;
+        }
+
+        hr {
+            border-color: #e2e8f0;
+            margin: 20px 0;
+            opacity: 1;
+        }
+
+        /* Table Design */
+        .table {
+            border-collapse: separate;
+            border-spacing: 0 10px;
+            margin-top: -10px;
+        }
+
+        .table-bordered {
+            border: none;
+        }
+
+        .table-bordered th, .table-bordered td {
+            border: none;
+        }
+
+        .table-dark {
+            background-color: transparent !important;
+        }
+
+        .table thead th {
+            color: #718096;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #edf2f7;
+            padding: 15px;
+            background: white !important;
+        }
+        
+        /* Cancel out bootstrap dark table */
+        .table-dark th {
+            color: #718096 !important;
+            background: white !important;
+        }
+
+        .table tbody tr {
+            background-color: #ffffff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .table tbody tr:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.06);
+        }
+
+        .table td {
+            vertical-align: middle;
+            padding: 20px 15px;
+            font-weight: 500;
+            color: #4a5568;
+            background: #fff;
+        }
+
+        .table td:first-child {
+            border-top-left-radius: 12px;
+            border-bottom-left-radius: 12px;
+            font-weight: 600;
+            color: #2d3436;
+        }
+
+        .table td:last-child {
+            border-top-right-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+
+        /* Buttons */
+        .btn {
+            border-radius: 8px;
+            font-weight: 600;
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .btn-sm {
+            padding: 6px 15px;
+            font-size: 13px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+            color: white;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #a8c0ff 0%, #3f2b96 100%);
+            color: white;
+        }
+
+        .mt-3 a {
+            margin-right: 15px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+                margin-top: 20px !important;
+                border-radius: 15px;
+                overflow-x: auto;
+            }
+            .table {
+                min-width: 650px;
+            }
+            h3 { font-size: 24px; }
+            h4 { font-size: 20px; }
+            .mt-3 a {
+                display: block;
+                width: 100%;
+                margin-right: 0;
+            }
+        }
+    </style>
 </head>
 
 <body>

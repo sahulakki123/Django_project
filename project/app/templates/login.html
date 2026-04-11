@@ -12,43 +12,177 @@
     <title>Login</title>
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
         body {
-            background: linear-gradient(135deg, #ff512f, #dd2476);
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             height: 100vh;
+            color: #ffffff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated Blobs using Pseudo-elements */
+        body::before, body::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 0;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        body::before {
+            width: 300px;
+            height: 300px;
+            background: #e94560;
+            top: -100px;
+            left: -100px;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        body::after {
+            width: 400px;
+            height: 400px;
+            background: #ff6b00;
+            bottom: -150px;
+            right: -100px;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-30px) scale(1.05); }
+            100% { transform: translateY(0px) scale(1); }
+        }
+
+        /* Ensure content is above background elements */
+        .container {
+            position: relative;
+            z-index: 10;
         }
 
         .login-card {
-            border: none;
-            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05) !important;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            border-radius: 24px !important;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+            color: #ffffff;
+            padding: 40px 30px !important;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .login-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.6) !important;
+        }
+
+        .login-card h4 {
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 25px !important;
+        }
+
+        .login-card a.text-decoration-none {
+            color: #ff6b00;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .login-card a.text-decoration-none:hover {
+            color: #ffffff;
+            text-decoration: underline !important;
+        }
+
+        .login-card p.text-center {
+            color: #b3b3b3;
         }
 
         .form-control {
-            border-radius: 12px;
-            padding: 12px;
+            background: rgba(0, 0, 0, 0.2) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            border-radius: 12px !important;
+            color: white !important;
+            padding: 14px 16px !important;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control::placeholder {
+            color: #b3b3b3 !important;
+        }
+
+        .form-control:focus {
+            background: rgba(0, 0, 0, 0.3) !important;
+            border-color: #ff6b00 !important;
+            box-shadow: 0 0 0 4px rgba(255, 107, 0, 0.1) !important;
         }
 
         .btn-food {
-            background: #ff6b00;
-            color: white;
-            border-radius: 12px;
-            padding: 10px;
+            background: linear-gradient(to right, #ff6b00, #ff8a3d) !important;
+            color: white !important;
+            border: none;
+            border-radius: 12px !important;
+            padding: 14px !important;
+            font-size: 16px;
             font-weight: 600;
+            box-shadow: 0 10px 20px rgba(255, 107, 0, 0.3);
+            transition: all 0.3s ease;
         }
 
         .btn-food:hover {
-            background: #e65c00;
-            color: white;
+            background: linear-gradient(to right, #ff7a1a, #ff9b57) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px rgba(255, 107, 0, 0.4);
         }
 
-        .food-title {
-            color: #ff6b00;
-            font-weight: 700;
+        .btn-food:active {
+            transform: translateY(1px);
         }
 
         .logo {
-            font-size: 28px;
-            font-weight: bold;
+            font-size: 32px;
+            font-weight: 700;
             color: #ff6b00;
+            letter-spacing: -1px;
+            margin-bottom: 5px;
+            display: inline-block;
+        }
+        
+        .logo:hover {
+            text-shadow: 0 0 15px rgba(255,107,0,0.5);
+            transition: text-shadow 0.3s ease;
+        }
+
+        .alert-danger {
+            background: rgba(255, 77, 77, 0.1) !important;
+            border: 1px solid rgba(255, 77, 77, 0.3) !important;
+            color: #ff4d4d !important;
+            border-radius: 12px !important;
+        }
+
+        /* Autofill styling */
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover, 
+        input:-webkit-autofill:focus, 
+        input:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 30px #1a1e29 inset !important;
+            -webkit-text-fill-color: white !important;
+            transition: background-color 5000s ease-in-out 0s;
         }
     </style>
 </head>
