@@ -24,14 +24,14 @@
             border: none;
             border-radius: 20px;
             background: #ffffff;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
             padding: 40px !important;
             margin-bottom: 50px;
             transition: all 0.3s ease;
         }
 
         .card:hover {
-            box-shadow: 0 20px 45px rgba(0,0,0,0.08);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
             transform: translateY(-2px);
         }
 
@@ -41,10 +41,10 @@
             height: 280px;
             width: 100%;
             object-fit: cover;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
             transition: transform 0.3s ease;
         }
-        
+
         .card img:hover {
             transform: scale(1.02);
         }
@@ -178,19 +178,24 @@
             .card {
                 padding: 25px !important;
             }
+
             .col-md-8 {
                 padding-left: 15px !important;
                 margin-top: 25px;
             }
+
             .card img {
                 height: 220px;
             }
+
             h3 {
                 font-size: 26px;
             }
+
             .text-success {
                 font-size: 24px;
             }
+
             input[type="number"] {
                 max-width: 100%;
             }
@@ -234,8 +239,7 @@
 
                         <div class="mb-3">
                             <label class="form-label">Quantity</label>
-                            <input type="number" name="quantity" value="1"
-                                class="form-control" min="1" required>
+                            <input type="number" name="quantity" value="1" class="form-control" min="1" required>
                         </div>
 
                         <input type="hidden" name="item_id" value="{{ item_details.id }}">
@@ -259,7 +263,9 @@
                     data-buttontext="Pay with Razorpay"
                     data-name="Food Order"
                     data-description="Payment for your order"
-                    data-theme.color="#28a745">
+                    data-prefill.contact="9999999999"
+                    data-prefill.email="test@razorpay.com"
+                    data-theme.color="#ff6b00">
                 </script>
 
             </form>

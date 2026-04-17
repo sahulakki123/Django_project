@@ -52,7 +52,7 @@ def signup(req):
 
                         Thank you 😊
                         """,
-                            "your_email@gmail.com",
+                            "lakkisahus04@gmail.com",
                             [e],
                             fail_silently=False,
                         )
@@ -192,6 +192,8 @@ from django.db.models import Q
 def search(req):
     if 'user_id' in req.session:
         s = req.GET.get('search')
+        u_id = req.session.get('user_id')
+        user = Usersign.objects.get(id=u_id)
 
         if s:
             items = Item.objects.filter(
@@ -202,9 +204,15 @@ def search(req):
         else:
             items = Item.objects.all()
 
+        cart_count = Cart.objects.filter(user=user).count()
+
         return render(req,'userdashboard.html',{
             'items': items,
-            'name': req.session.get('user_name')
+            'name': user.Name,
+            'email': user.Email,
+            'contact': user.Contact,
+            'cart_count': cart_count,
+            'show_profile': False
         })
 
     return redirect('login')
@@ -229,6 +237,8 @@ def add_to_cart(req, id):
             cart_item.save()
 
         return redirect('userdashboard')
+    else:
+        return redirect('login')
 
 
 
@@ -270,17 +280,20 @@ def paynow(req, pk):
 import razorpay
 def payment_amount(req,pk):
     if req.method=="POST":
-        amount1 = req.POST.get("itemprice")
-        print(type(amount1))
-        amount = int(amount1)*100
+        item_price = int(req.POST.get("itemprice", 0))
+        qty = int(req.POST.get("quantity", 1))
+        
+        total_amount = item_price * qty
+        amount_in_paise = total_amount * 100
+        
         client = razorpay.Client(auth =("rzp_test_pr99iascS1WRtU" , "UTDIzPGwICnAssu3Q3lk7zUi"))
-        data = { "amount": 50000, "currency": "INR", "receipt": "order_rcptid_11" }
+        data = { "amount": amount_in_paise, "currency": "INR", "receipt": "order_rcptid_11" }
         payment = client.order.create(data=data)
-        print(payment)
+        
         a_data = req.session.get('a_data')
         item_details=Item.objects.get(id=pk)
-        Order.objects.create(order_id = payment.get('id'), amount = int(amount1))
-    return render(req,'payment.html',{'payment':payment,'amount':amount1,'data':a_data,'item_details':item_details})
+        Order.objects.create(order_id = payment.get('id'), amount = total_amount)
+    return render(req,'payment.html',{'payment':payment,'amount':total_amount,'data':a_data,'item_details':item_details})
 
 
 
@@ -408,37 +421,24 @@ def show_item(request):
 
 
 
-def userdashboard(req):
-    if 'user_id' in req.session:
-        user = Usersign.objects.get(id=req.session['user_id'])
-        items = Item.objects.all()
-
-        cart_count = Cart.objects.filter(user=user).count()
-
-        return render(req,'userdashboard.html',{
-            'items':items,
-            'name':user.Name,
-            'cart_count':cart_count
-        })
-
-
-
-
-
 # Dashboard
 def userdashboard(req):
     if 'user_id' in req.session:
         u_id = req.session.get('user_id')
         user = Usersign.objects.get(id=u_id)
         items = Item.objects.all()
+        cart_count = Cart.objects.filter(user=user).count()
 
         return render(req, "userdashboard.html", {
             "name": user.Name,
             "email": user.Email,
             "contact": user.Contact,
             "items": items,
+            "cart_count": cart_count,
             "show_profile": False
         })
+    else:
+        return redirect('login')
 
 
 def profile(req):
@@ -446,23 +446,21 @@ def profile(req):
         u_id = req.session.get('user_id')
         user = Usersign.objects.get(id=u_id)
         items = Item.objects.all()
+        cart_count = Cart.objects.filter(user=user).count()
 
         return render(req, "userdashboard.html", {
             "name": user.Name,
             "email": user.Email,
             "contact": user.Contact,
             "items": items,
+            "cart_count": cart_count,
             "show_profile": True
         })
+    else:
+        return redirect('login')
 
 
 # Logout
-def logout(req):
-    req.session.flush()
-    return redirect('landing')
-
-
-
 def logout(req):
     if 'user_id' in req.session:
         req.session.flush()

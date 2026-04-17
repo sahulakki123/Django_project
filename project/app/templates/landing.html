@@ -321,6 +321,48 @@
         .animate-float-delayed {
             animation: float 6s ease-in-out 3s infinite;
         }
+
+        /* Footer */
+        footer {
+            background-color: #111 !important;
+            padding-top: 60px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        footer h5 {
+            color: white;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        footer ul li {
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        footer ul li:hover {
+            color: var(--primary-color);
+        }
+
+        .social-icons i {
+            font-size: 1.2rem;
+            color: white;
+            background: rgba(255,255,255,0.1);
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .social-icons i:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
     </style>
 </head>
 
@@ -352,7 +394,7 @@
                         </a>
                     </li>
                     <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
-                        <a class="btn btn-outline-dark rounded-pill px-4 py-2 fw-semibold" href="{% url 'signup' %}">Sign In</a>
+                        <a class="btn btn-outline-dark rounded-pill px-4 py-2 fw-semibold" href="{% url 'login' %}">Login</a>
                     </li>
                     <li class="nav-item mt-2 mt-lg-0">
                         <a class="btn-primary-custom d-inline-block" href="#">Get the App</a>
@@ -604,9 +646,79 @@
 
         </div>
     </div>
-    
-    <!-- Footer/Spacing -->
-    <div class="mb-5 pb-5"></div>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row g-4 pb-5">
+                <div class="col-lg-4 col-md-6">
+                    <div class="mb-4 d-flex align-items-center gap-2">
+                        <img src="{% static 'image/logo.png'%}" height="50" alt="Logo">
+                        <h4 class="text-white fw-bold mb-0">Foodhub</h4>
+                    </div>
+                    <p class="mb-4 pe-lg-4">Pioneering the future of convenient delivery, making every meal an experience worth savoring.</p>
+                    <p class="text-muted mb-0">© 2025 Foodhub Limited</p>
+                </div>
+
+                <div class="col-lg-2 col-md-6 mt-lg-5">
+                    <h5>Company</h5>
+                    <ul class="list-unstyled">
+                        <li>About Us</li>
+                        <li>Careers</li>
+                        <li>Team</li>
+                        <li>Foodhub Blog</li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mt-lg-5">
+                    <h5>Contact</h5>
+                    <ul class="list-unstyled">
+                        <li>Help & Support</li>
+                        <li>Partner with us</li>
+                        <li>Ride with us</li>
+                        <li>Terms & Conditions</li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mt-lg-5">
+                    <h5>Follow Us</h5>
+                    <div class="social-icons d-flex gap-3 mb-4">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                        <i class="fa-brands fa-instagram"></i>
+                        <i class="fa-brands fa-facebook-f"></i>
+                        <i class="fa-brands fa-twitter"></i>
+                    </div>
+                    
+                    <h6 class="text-white mt-4 mb-3 fw-bold">Download App</h6>
+                    <div class="d-flex flex-column gap-2" style="max-width: 150px;">
+                        <img src="{% static 'image/appstorelogo.svg'%}" alt="App Store" class="img-fluid rounded" style="cursor: pointer;">
+                        <img src="{% static 'image/playstorelogo.webp'%}" alt="Play Store" class="img-fluid rounded" style="cursor: pointer;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Signup Modal -->
+    <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg" style="border-radius: 24px;">
+          <div class="modal-header border-0 pb-0 pt-4 px-4">
+            <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-center pt-0 pb-5 px-5">
+            <div class="mb-4 mt-2">
+                <i class="fa-solid fa-user-plus text-primary" style="font-size: 3.5rem;"></i>
+            </div>
+            <h4 class="fw-bold mb-3" style="color: var(--dark-color);">Create an Account</h4>
+            <p class="text-muted mb-4 pb-2" style="font-size: 1.05rem;">Please create an account or login to start ordering your favorite food!</p>
+            <div class="d-flex flex-column gap-3">
+                <a href="{% url 'signup' %}" class="btn btn-primary-custom w-100 py-3 fs-5" style="border-radius: 50px;">Create Account</a>
+                <a href="{% url 'login' %}" class="btn btn-outline-dark rounded-pill py-3 fw-semibold fs-5 w-100">Login</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -635,6 +747,15 @@
             }
             
             lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        });
+
+        // Show modal when clicking on any food item category
+        document.querySelectorAll('.food-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                var signupModal = new bootstrap.Modal(document.getElementById('signupModal'));
+                signupModal.show();
+            });
         });
     </script>
 </body>
