@@ -11,7 +11,9 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="{% static 'image/logo.png' %}">
 
     <title>{% block title %}Foodhub - Dashboard{% endblock %}</title>
 
@@ -27,7 +29,7 @@
             font-family: 'Outfit', sans-serif;
             background-color: #f8f9fa;
             color: var(--dark-color);
-            padding-top: 80px; 
+            padding-top: 80px;
         }
 
         /* Navbar Styling */
@@ -75,13 +77,13 @@
         .nav-link:hover::after {
             width: 80%;
         }
-        
+
         .search-form .form-control {
             border-radius: 20px 0 0 20px;
             border: 1px solid #e0e0e0;
             padding-left: 20px;
         }
-        
+
         .search-form .btn-search {
             background: var(--primary-color);
             color: white;
@@ -90,11 +92,11 @@
             padding: 0 20px;
             transition: background 0.3s;
         }
-        
+
         .search-form .btn-search:hover {
             background: var(--primary-hover);
         }
-        
+
         .action-btn {
             border-radius: 20px;
             padding: 6px 16px;
@@ -104,19 +106,19 @@
             align-items: center;
             gap: 6px;
         }
-        
+
         .btn-cart {
             background-color: #fff;
             color: var(--dark-color);
             border: 1px solid #e0e0e0;
         }
-        
+
         .btn-cart:hover {
             background-color: var(--light-bg);
             border-color: var(--primary-color);
             color: var(--primary-color);
         }
-        
+
         .cart-badge {
             background-color: var(--primary-color) !important;
         }
@@ -135,13 +137,13 @@
             padding: 40px 20px 60px;
             position: relative;
         }
-        
+
         .profile-img {
             width: 100px;
             height: 100px;
             border-radius: 50%;
             border: 4px solid white;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
             position: absolute;
             bottom: -50px;
             left: 50%;
@@ -153,18 +155,18 @@
         .profile-body {
             padding: 70px 30px 30px;
         }
-        
+
         .info-row {
             padding: 15px 0;
             border-bottom: 1px solid #f0f0f0;
             display: flex;
             align-items: center;
         }
-        
+
         .info-row:last-child {
             border-bottom: none;
         }
-        
+
         .info-icon {
             width: 40px;
             height: 40px;
@@ -216,7 +218,7 @@
         .food-card:hover .food-img-wrapper img {
             transform: scale(1.05);
         }
-        
+
         .price-badge {
             position: absolute;
             top: 15px;
@@ -226,7 +228,7 @@
             border-radius: 20px;
             font-weight: 700;
             color: var(--primary-color);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             backdrop-filter: blur(5px);
             z-index: 2;
         }
@@ -325,7 +327,7 @@
         footer {
             background-color: #111 !important;
             padding-top: 60px;
-            color: rgba(255,255,255,0.7);
+            color: rgba(255, 255, 255, 0.7);
         }
 
         footer h5 {
@@ -347,7 +349,7 @@
         .social-icons i {
             font-size: 1.2rem;
             color: white;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
             width: 40px;
             height: 40px;
             display: inline-flex;
@@ -362,14 +364,14 @@
             background: var(--primary-color);
             transform: translateY(-3px);
         }
-        
+
         .page-header {
             background: linear-gradient(to right, rgba(255, 255, 255, 0.8), transparent);
             padding: 25px 30px;
             border-radius: 20px;
             margin-bottom: 30px;
             border-left: 5px solid var(--primary-color);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
             backdrop-filter: blur(5px);
         }
     </style>
@@ -386,7 +388,8 @@
                 <span class="fw-bold fs-4 d-none d-sm-block" style="color: var(--primary-color);">Foodhub</span>
             </a>
 
-            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#nav">
                 <i class="fa-solid fa-bars fs-4 text-dark"></i>
             </button>
 
@@ -395,12 +398,14 @@
                     <li class="nav-item"><a class="nav-link" href="#">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-                    <li class="nav-item"><a class="nav-link fw-semibold text-primary" href="{% url 'profile' %}">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold text-primary"
+                            href="{% url 'profile' %}">Profile</a></li>
                 </ul>
-                
+
                 <div class="d-flex flex-column flex-lg-row align-items-center gap-3 mt-3 mt-lg-0">
                     <form class="d-flex search-form" action="{% url 'search' %}">
-                        <input class="form-control form-control-sm" type="search" name="search" placeholder="Search food...">
+                        <input class="form-control form-control-sm" type="search" name="search"
+                            placeholder="Search food...">
                         <button class="btn btn-search btn-sm" type="submit">
                             <i class="fa fa-search"></i>
                         </button>
@@ -409,7 +414,8 @@
                     <div class="d-flex gap-2">
                         <a href="{% url 'cart_page' %}" class="btn action-btn btn-cart position-relative">
                             <i class="fa-solid fa-cart-shopping"></i> Cart
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill cart-badge shadow-sm">
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill cart-badge shadow-sm">
                                 {{ cart_count }}
                             </span>
                         </a>
@@ -426,7 +432,7 @@
 
 
     <div class="container mt-4">
-        
+
         <div class="page-header d-flex justify-content-between align-items-center flex-wrap gap-3">
             <div>
                 <h3 class="mb-1 fw-bold text-dark">Welcome back, {{ name }} 👋</h3>
@@ -434,7 +440,9 @@
             </div>
             {% if not show_profile %}
             <div class="d-flex gap-2">
-                <span class="badge bg-white text-dark border shadow-sm px-3 py-2 rounded-pill"><i class="fa-solid fa-location-dot text-primary me-2"></i> Delivering to <strong>Your Location</strong></span>
+                <span class="badge bg-white text-dark border shadow-sm px-3 py-2 rounded-pill"><i
+                        class="fa-solid fa-location-dot text-primary me-2"></i> Delivering to <strong>Your
+                        Location</strong></span>
             </div>
             {% endif %}
         </div>
@@ -448,7 +456,8 @@
                     <!-- Header -->
                     <div class="profile-header text-center text-white">
                         <div class="profile-img">
-                            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="w-100 rounded-circle" alt="User">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+                                class="w-100 rounded-circle" alt="User">
                         </div>
                     </div>
 
@@ -456,13 +465,16 @@
                     <div class="profile-body">
                         <div class="text-center mb-4">
                             <h4 class="fw-bold mb-1">{{ name }}</h4>
-                            <span class="badge bg-light text-primary border rounded-pill px-3 py-1">Foodhub Member</span>
+                            <span class="badge bg-light text-primary border rounded-pill px-3 py-1">Foodhub
+                                Member</span>
                         </div>
 
                         <div class="info-row">
                             <div class="info-icon"><i class="fa-solid fa-user"></i></div>
                             <div>
-                                <small class="text-muted d-block fw-semibold" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">Full Name</small>
+                                <small class="text-muted d-block fw-semibold"
+                                    style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">Full
+                                    Name</small>
                                 <span class="fw-bold text-dark">{{ name }}</span>
                             </div>
                         </div>
@@ -470,7 +482,9 @@
                         <div class="info-row">
                             <div class="info-icon" style="color: #27ae60;"><i class="fa-solid fa-envelope"></i></div>
                             <div>
-                                <small class="text-muted d-block fw-semibold" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">Email Address</small>
+                                <small class="text-muted d-block fw-semibold"
+                                    style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">Email
+                                    Address</small>
                                 <span class="fw-bold text-dark">{{ email }}</span>
                             </div>
                         </div>
@@ -478,13 +492,16 @@
                         <div class="info-row">
                             <div class="info-icon" style="color: #f39c12;"><i class="fa-solid fa-phone"></i></div>
                             <div>
-                                <small class="text-muted d-block fw-semibold" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">Contact Number</small>
+                                <small class="text-muted d-block fw-semibold"
+                                    style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">Contact
+                                    Number</small>
                                 <span class="fw-bold text-dark">{{ contact }}</span>
                             </div>
                         </div>
 
                         <div class="text-center mt-5">
-                            <a href="{% url 'userdashboard' %}" class="btn btn-outline-dark rounded-pill px-5 fw-semibold">
+                            <a href="{% url 'userdashboard' %}"
+                                class="btn btn-outline-dark rounded-pill px-5 fw-semibold">
                                 <i class="fa-solid fa-arrow-left me-2"></i> Back
                             </a>
                         </div>
@@ -513,19 +530,22 @@
                         <div class="d-flex justify-content-between align-items-start mb-2">
                             <h5 class="food-title text-truncate" title="{{ i.itemname }}">{{ i.itemname }}</h5>
                         </div>
-                        
+
                         <div class="restaurant-name">
-                            <i class="fa-solid fa-store text-primary"></i> 
+                            <i class="fa-solid fa-store text-primary"></i>
                             <span class="text-truncate">{{ i.restaurant.restaurantname }}</span>
                         </div>
-                        
+
                         <p class="food-desc">{{ i.itemdesc|truncatechars:70 }}</p>
-                        
+
                         <div class="card-actions mt-auto">
-                            <a href="{% url 'add_to_cart' i.id %}" class="btn btn-add-cart d-flex align-items-center justify-content-center" title="Add to Cart">
+                            <a href="{% url 'add_to_cart' i.id %}"
+                                class="btn btn-add-cart d-flex align-items-center justify-content-center"
+                                title="Add to Cart">
                                 <i class="fa-solid fa-cart-plus fs-5"></i>
                             </a>
-                            <a href="{% url 'paynow' i.id %}" class="btn btn-order d-flex align-items-center justify-content-center">
+                            <a href="{% url 'paynow' i.id %}"
+                                class="btn btn-order d-flex align-items-center justify-content-center">
                                 <i class="fa-solid fa-bolt me-2 text-warning"></i> Order Now
                             </a>
                         </div>
@@ -546,29 +566,43 @@
         <div class="container">
             <h2 class="section-title">Discover the Foodhub Experience</h2>
             <p class="text-muted fs-5 mb-5 mx-auto" style="max-width: 700px;">
-                Foodhub is a new-age consumer-first organization offering an easy-to-use convenience platform for all your cravings and essentials.
+                Foodhub is a new-age consumer-first organization offering an easy-to-use convenience platform for all
+                your cravings and essentials.
             </p>
 
             <div class="row g-4 justify-content-center mt-2">
                 <div class="col-md-4">
-                    <div class="rounded-4 overflow-hidden shadow-sm h-100" style="transition: transform 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
-                        <img src="{% static 'image/food.webp'%}" class="img-fluid w-100 h-100 object-fit-cover" alt="Food Delivery">
+                    <div class="rounded-4 overflow-hidden shadow-sm h-100"
+                        style="transition: transform 0.3s; cursor: pointer;"
+                        onmouseover="this.style.transform='translateY(-10px)'"
+                        onmouseout="this.style.transform='translateY(0)'">
+                        <img src="{% static 'image/food.webp'%}" class="img-fluid w-100 h-100 object-fit-cover"
+                            alt="Food Delivery">
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="rounded-4 overflow-hidden shadow-sm h-100" style="transition: transform 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
-                        <img src="{% static 'image/instamart.webp'%}" class="img-fluid w-100 h-100 object-fit-cover" alt="Instamart">
+                    <div class="rounded-4 overflow-hidden shadow-sm h-100"
+                        style="transition: transform 0.3s; cursor: pointer;"
+                        onmouseover="this.style.transform='translateY(-10px)'"
+                        onmouseout="this.style.transform='translateY(0)'">
+                        <img src="{% static 'image/instamart.webp'%}" class="img-fluid w-100 h-100 object-fit-cover"
+                            alt="Instamart">
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="rounded-4 overflow-hidden shadow-sm h-100" style="transition: transform 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
-                        <img src="{% static 'image/dineout.webp'%}" class="img-fluid w-100 h-100 object-fit-cover" alt="Dineout">
+                    <div class="rounded-4 overflow-hidden shadow-sm h-100"
+                        style="transition: transform 0.3s; cursor: pointer;"
+                        onmouseover="this.style.transform='translateY(-10px)'"
+                        onmouseout="this.style.transform='translateY(0)'">
+                        <img src="{% static 'image/dineout.webp'%}" class="img-fluid w-100 h-100 object-fit-cover"
+                            alt="Dineout">
                     </div>
                 </div>
             </div>
-            
+
             <div class="mt-5 pt-4">
-                <img src="{% static 'image/logo.png'%}" height="80" alt="Foodhub Logo" style="opacity: 0.8; filter: grayscale(50%);">
+                <img src="{% static 'image/logo.png'%}" height="80" alt="Foodhub Logo"
+                    style="opacity: 0.8; filter: grayscale(50%);">
             </div>
         </div>
     </section>
@@ -582,7 +616,8 @@
                         <img src="{% static 'image/logo.png'%}" height="50" alt="Logo">
                         <h4 class="text-white fw-bold mb-0">Foodhub</h4>
                     </div>
-                    <p class="mb-4 pe-lg-4">Pioneering the future of convenient delivery, making every meal an experience worth savoring.</p>
+                    <p class="mb-4 pe-lg-4">Pioneering the future of convenient delivery, making every meal an
+                        experience worth savoring.</p>
                     <p class="text-muted mb-0">© 2025 Foodhub Limited</p>
                 </div>
 
@@ -614,11 +649,13 @@
                         <i class="fa-brands fa-facebook-f"></i>
                         <i class="fa-brands fa-twitter"></i>
                     </div>
-                    
+
                     <h6 class="text-white mt-4 mb-3 fw-bold">Download App</h6>
                     <div class="d-flex flex-column gap-2" style="max-width: 150px;">
-                        <img src="{% static 'image/appstorelogo.svg'%}" alt="App Store" class="img-fluid rounded" style="cursor: pointer;">
-                        <img src="{% static 'image/playstorelogo.webp'%}" alt="Play Store" class="img-fluid rounded" style="cursor: pointer;">
+                        <img src="{% static 'image/appstorelogo.svg'%}" alt="App Store" class="img-fluid rounded"
+                            style="cursor: pointer;">
+                        <img src="{% static 'image/playstorelogo.webp'%}" alt="Play Store" class="img-fluid rounded"
+                            style="cursor: pointer;">
                     </div>
                 </div>
             </div>
