@@ -78,12 +78,12 @@ def login(req):
     if req.method=='POST':
         Email=req.POST.get('email')
         Password=req.POST.get('password')
-        if Email=='admin@gmail.com' and Password=='admin':
+        if Email=='admin@gmail.com' and Password=='Lakki@2004':
             a_data={
                 'id':1,
-                'name':'Admin',
+                'name':'Admin Lakki',
                 'email':'admin@gmail.com',
-                'password':'admin',
+                'password':'Lakki@2004',
                 'image':'image/image.jpg',
             }
             req.session['a_data']=a_data
